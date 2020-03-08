@@ -2,12 +2,13 @@ package com.lildutils.springboot.web.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 @Configuration
-public class LDuVersionControllerSecurity extends LDuControllerEndpointSecurityRegister
+public class LDuVersionControllerSecurityRegister extends LDuControllerEndpointSecurityRegister
 {
 	@Override
-	protected void registerEndpointsWebSecurity() throws Exception
+	protected void registerEndpointsWebSecurity( HttpSecurity http ) throws Exception
 	{
 		http.authorizeRequests().antMatchers( HttpMethod.GET, "/version" ).permitAll()
 				.antMatchers( HttpMethod.GET, "/version.json" ).permitAll()

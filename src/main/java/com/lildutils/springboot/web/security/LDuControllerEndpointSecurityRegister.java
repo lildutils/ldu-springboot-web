@@ -1,38 +1,16 @@
 package com.lildutils.springboot.web.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContextException;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 @Configuration
 public abstract class LDuControllerEndpointSecurityRegister
 {
-	@Autowired
-	protected Environment	environment;
+	protected abstract void registerEndpointsWebSecurity( HttpSecurity http ) throws Exception;
 
-	@Autowired
-	protected HttpSecurity	http;
-
-	protected abstract void registerEndpointsWebSecurity() throws Exception;
-
-	public LDuControllerEndpointSecurityRegister()
+	public void run( HttpSecurity http ) throws Exception
 	{
-		super();
-		registerEndpoints();
-	}
-
-	private void registerEndpoints()
-	{
-		try
-		{
-			registerEndpointsWebSecurity();
-		}
-		catch( Exception e )
-		{
-			throw new ApplicationContextException( e.getMessage() );
-		}
+		registerEndpointsWebSecurity( http );
 	}
 
 }

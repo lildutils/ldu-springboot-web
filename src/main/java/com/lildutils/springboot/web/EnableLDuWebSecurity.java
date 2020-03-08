@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 import org.springframework.context.annotation.Import;
 
-import com.lildutils.springboot.web.configurer.LDuWebSecurityConfigurer;
+import com.lildutils.springboot.web.config.LDuWebSecurityConfigurer;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
