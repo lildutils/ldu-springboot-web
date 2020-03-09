@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 @Configuration
-public class LDuWebSecurityRegister
+public class LDuWebSecurityRegister implements LDuSecurityRegister
 {
 	@Autowired
 	private LDuActuatorControllerSecurityRegister	actuatorSecurityRegister;
@@ -22,6 +22,7 @@ public class LDuWebSecurityRegister
 	@Autowired
 	private LDuVersionControllerSecurityRegister	versionSecurityRegister;
 
+	@Override
 	public void run( HttpSecurity http ) throws Exception
 	{
 		actuatorSecurityRegister.run( http );
