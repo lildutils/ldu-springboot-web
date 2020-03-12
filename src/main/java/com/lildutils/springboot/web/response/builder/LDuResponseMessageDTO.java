@@ -26,11 +26,6 @@ public class LDuResponseMessageDTO
 		this.text = text;
 	}
 
-	public LDuResponseMessageDTO( String key )
-	{
-		this( key, key );
-	}
-
 	public String getKey()
 	{
 		return key;

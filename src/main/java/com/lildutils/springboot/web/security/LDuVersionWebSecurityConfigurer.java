@@ -5,10 +5,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 @Configuration
-public class LDuVersionControllerSecurityRegister extends LDuControllerEndpointSecurityRegister
+public class LDuVersionWebSecurityConfigurer implements LDuControllerWebSecurityConfigurer
 {
 	@Override
-	protected void registerEndpointsWebSecurity( HttpSecurity http ) throws Exception
+	public void configure( HttpSecurity http ) throws Exception
 	{
 		http.authorizeRequests().antMatchers( HttpMethod.GET, "/version" ).permitAll()
 				.antMatchers( HttpMethod.GET, "/version.json" ).permitAll()

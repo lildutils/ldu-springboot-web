@@ -2,8 +2,8 @@ package com.lildutils.springboot.web.security;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
-public interface LDuSecurityRegister
+public interface LDuControllerWebSecurityConfigurer
 {
-	void run( HttpSecurity http ) throws Exception;
+	void configure( HttpSecurity http ) throws Exception;
 
 }

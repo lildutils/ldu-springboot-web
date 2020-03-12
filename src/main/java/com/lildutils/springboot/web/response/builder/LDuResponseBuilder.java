@@ -1,50 +1,60 @@
 package com.lildutils.springboot.web.response.builder;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LDuResponseBuilder
 {
-	public static LDuResponseDTO build( String responseLevel, String... responseMessages )
+	private LDuResponseBuilder()
+	{
+		super();
+	}
+
+	public static LDuResponseBuilder init()
+	{
+		return new LDuResponseBuilder();
+	}
+
+	public LDuResponseDTO build( LDuResponseLevel responseLevel, List<LDuResponseMessageDTO> responseMessages )
 	{
 		final LDuResponseDTO dto = new LDuResponseDTO();
-		dto.setLevel( responseLevel );
-		Arrays.asList( responseMessages ).forEach( dto::add );
+		dto.setLevel( responseLevel.name() );
+		responseMessages.forEach( responseMessage -> dto.add( responseMessage ) );
 		return dto;
 	}
 
-	public static LDuResponseDTO build( LDuResponseLevel level, String... messages )
+	public LDuResponseDTO buildINFO( String message )
 	{
-		return build( level.name().toLowerCase(), messages );
+		return buildINFO( message, message );
 	}
 
-	public static LDuResponseDTO buildINFO( String message )
+	public LDuResponseDTO buildINFO( String messageKey, String... messages )
 	{
-		return build( LDuResponseLevel.INFO, message );
+		return build( LDuResponseLevel.INFO, Arrays.asList( messages ).stream()
+				.map( message -> new LDuResponseMessageDTO( messageKey, message ) ).collect( Collectors.toList() ) );
 	}
 
-	public static LDuResponseDTO buildINFO( String... messages )
+	public LDuResponseDTO buildWARN( String message )
 	{
-		return build( LDuResponseLevel.INFO, messages );
+		return buildWARN( message, message );
 	}
 
-	public static LDuResponseDTO buildWARN( String message )
+	public LDuResponseDTO buildWARN( String messageKey, String... messages )
 	{
-		return build( LDuResponseLevel.WARN, message );
+		return build( LDuResponseLevel.WARN, Arrays.asList( messages ).stream()
+				.map( message -> new LDuResponseMessageDTO( messageKey, message ) ).collect( Collectors.toList() ) );
 	}
 
-	public static LDuResponseDTO buildWARN( String... messages )
+	public LDuResponseDTO buildERROR( String message )
 	{
-		return build( LDuResponseLevel.WARN, messages );
+		return buildERROR( message, message );
 	}
 
-	public static LDuResponseDTO buildERROR( String message )
+	public LDuResponseDTO buildERROR( String messageKey, String... messages )
 	{
-		return build( LDuResponseLevel.ERROR, message );
-	}
-
-	public static LDuResponseDTO buildERROR( String... messages )
-	{
-		return build( LDuResponseLevel.ERROR, messages );
+		return build( LDuResponseLevel.ERROR, Arrays.asList( messages ).stream()
+				.map( message -> new LDuResponseMessageDTO( messageKey, message ) ).collect( Collectors.toList() ) );
 	}
 
 }

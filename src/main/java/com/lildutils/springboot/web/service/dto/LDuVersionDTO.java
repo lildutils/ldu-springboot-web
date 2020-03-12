@@ -13,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @XmlRootElement
 public class LDuVersionDTO
 {
-	private String version;
+	private String	name;
+	private String	version;
 
 	public LDuVersionDTO()
 	{
@@ -23,7 +24,18 @@ public class LDuVersionDTO
 	public LDuVersionDTO( Environment environment )
 	{
 		super();
+		this.name = environment.getProperty( "application.name" );
 		this.version = environment.getProperty( "application.version" );
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName( String name )
+	{
+		this.name = name;
 	}
 
 	public String getVersion()

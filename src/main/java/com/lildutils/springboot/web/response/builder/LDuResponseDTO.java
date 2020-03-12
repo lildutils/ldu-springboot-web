@@ -15,16 +15,20 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class LDuResponseDTO
 {
 	private String						level;
+
 	private List<LDuResponseMessageDTO>	messages	= new ArrayList<>();
 
-	public void add( String messageKey )
+	public LDuResponseDTO()
 	{
-		getMessages().add( new LDuResponseMessageDTO( messageKey ) );
+		super();
 	}
 
-	public void add( String messageKey, String messageTranslated )
+	public void add( LDuResponseMessageDTO... messages )
 	{
-		getMessages().add( new LDuResponseMessageDTO( messageKey, messageTranslated ) );
+		for( int i = 0; i < messages.length; i++ )
+		{
+			getMessages().add( messages[i] );
+		}
 	}
 
 	public String getLevel()
